@@ -2,7 +2,7 @@ import boto3
 import uuid
 from awsdeploy.deployment import Deployment
 from awsdeploy.config import Config
-from schematics.types import ListType, StringType
+from schematics.types import ListType, StringType, BooleanType
 from awsdeploy import package
 
 client = boto3.client('cloudformation')
@@ -20,7 +20,6 @@ class LambdaDeployment(Deployment):
             update_arguments = {}
 
             if self.config.s3:
-                print('Deploying with S3')
                 s3 = boto3.client('s3')
                 bucket_name = 'deploy-{}'.format(str(uuid.uuid4()).lower())
                 bucket_path = 'deployment.zip'
@@ -43,7 +42,7 @@ class LambdaDeployment(Deployment):
             if functions:
                 for function in functions:
                     awslambda.update_function_code(
-                        FunctionName=function['PhysicalResourceId'], **update_arguments)
+                        FunctionName=function['PhysicalResourceId'], Publish=self.config.publish, **update_arguments)
                     print('Function {} deployed successfully'.format(function['LogicalResourceId']))
             else:
                 print('No Functions selected for deployment')
@@ -62,3 +61,5 @@ class LambdaDeployment(Deployment):
 class LambdaConfig(Config):
     functions = ListType(StringType, default=[])
     paths = ListType(StringType, default=['./'])
+    publish = BooleanType(default=False)
+    s3 = BooleanType(default=False)
