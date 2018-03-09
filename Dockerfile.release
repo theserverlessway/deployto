@@ -1,9 +1,13 @@
 FROM python:alpine
 
-LABEL io.whalebrew.name 'formica'
-LABEL io.whalebrew.config.environment '["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "AWS_SESSION_TOKEN", "AWS_DEFAULT_REGION", "AWS_DEFAULT_PROFILE", "AWS_PROFILE", "AWS_CONFIG_FILE"]'
+LABEL io.whalebrew.name 'awsdeploy'
+LABEL io.whalebrew.config.environment '["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "AWS_SESSION_TOKEN", "AWS_DEFAULT_REGION", "AWS_PROFILE", "AWS_CONFIG_FILE"]'
 LABEL io.whalebrew.config.volumes '["~/.aws:/.aws"]'
 
-RUN pip install formica-cli
+WORKDIR /app
 
-ENTRYPOINT ["formica"]
+COPY ./ ./
+
+RUN pip install .
+
+ENTRYPOINT ["awsdeploy"]

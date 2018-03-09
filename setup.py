@@ -38,7 +38,7 @@ setup(
     ],
     keywords='aws, cloud, awscli, deployment',
     packages=['awsdeploy'],
-    install_requires=['boto3', 'schematics'],
+    install_requires=['boto3==1.6.4', 'pyyaml==3.12', 'schematics==2.0.1'],
     entry_points={
         'console_scripts': [
             'awsdeploy=awsdeploy.cli:main',
