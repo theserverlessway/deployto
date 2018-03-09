@@ -1,0 +1,44 @@
+Resources:
+  LambdaLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/{{ '${' }}LambdaFunction}
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: "{{ Code or "def handler(event, context):\\n    print(event)\\n    return event" }}"
+      Handler: {{ Handler or 'index.handler' }}
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Runtime: {{ Runtime or 'python3.6' }}
+      Environment:
+        Variables: {{Environment or '!Ref AWS::NoValue' }}
+
+  LambdaExecutionRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+        Version: '2012-10-17'
+      Path: "/"
+    Type: AWS::IAM::Role
+
+  LambdaRolePolicy:
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action:
+              - "logs:CreateLogStream"
+              - "logs:PutLogEvents"
+            Effect: Allow
+            Resource: !Sub {{ '${' }} LambdaLogGroup.Arn}*
+      PolicyName: LogAccess
+      Roles:
+      - !Ref LambdaExecutionRole
+    Type: AWS::IAM::Policy

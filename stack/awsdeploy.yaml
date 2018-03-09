@@ -1,0 +1,8 @@
+stack: teststack
+service: lambda
+paths:
+ - 'code:'
+s3: true
+functions:
+  - LambdaFunction2
+# publish: true
