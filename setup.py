@@ -37,7 +37,7 @@ setup(
         'Programming Language :: Python :: 3.4',
     ],
     keywords='aws, cloud, awscli, deployment',
-    packages=['deployto'],
+    packages=['deployto', 'deployto.deployment'],
     install_requires=['boto3==1.6.4', 'pyyaml==3.12', 'schematics==2.0.1'],
     entry_points={
         'console_scripts': [

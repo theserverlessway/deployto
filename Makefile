@@ -31,11 +31,11 @@ release-pypi: build-dev build
 	docker-compose run deployto twine upload dist/*
 
 release-docker:
-	docker build --no-cache -t flomotlik/deployto -f Dockerfile.release .
-	docker push flomotlik/deployto
+	docker build --no-cache -t theserverlessway/deployto -f Dockerfile.release .
+	docker push theserverlessway/deployto
 
 release: release-pypi release-docker
 
 whalebrew:
-	docker build -t flomotlik/deployto:whalebrew -f Dockerfile.whalebrew .
-	whalebrew install -f flomotlik/deployto:whalebrew
+	docker build -t theserverlessway/deployto:whalebrew -f Dockerfile.whalebrew .
+	whalebrew install -f theserverlessway/deployto:whalebrew
