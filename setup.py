@@ -4,7 +4,7 @@ from os.path import abspath, dirname, join, isfile
 
 from setuptools import setup
 
-from awsdeploy import __version__
+from deployto import __version__
 
 this_dir = abspath(dirname(__file__))
 path = join(this_dir, 'README.rst')
@@ -14,11 +14,11 @@ if isfile(path):
         long_description = file.read()
 
 setup(
-    name='awsdeploy',
+    name='deployto',
     version=__version__,
     description='CloudFormation aware deployment tool',
     long_description=long_description,
-    url='https://github.com/flomotlik/awsdeploy',
+    url='https://github.com/flomotlik/deployto',
     author='Florian Motlik',
     author_email='flo@theserverlessway.com',
     license='MIT',
@@ -37,11 +37,11 @@ setup(
         'Programming Language :: Python :: 3.4',
     ],
     keywords='aws, cloud, awscli, deployment',
-    packages=['awsdeploy'],
+    packages=['deployto'],
     install_requires=['boto3==1.6.4', 'pyyaml==3.12', 'schematics==2.0.1'],
     entry_points={
         'console_scripts': [
-            'awsdeploy=awsdeploy.cli:main',
+            'deployto=deployto.cli:main',
         ],
     }
 )

@@ -5,7 +5,7 @@ install:
 	python setup.py develop
 
 test:
-	py.test --cov=awsdeploy tests/unit
+	py.test --cov=deployto tests/unit
 
 check-code:
 	pycodestyle .
@@ -15,27 +15,27 @@ integration-test:
 	py.test -s tests/integration
 
 build-dev:
-	docker-compose build awsdeploy
+	docker-compose build deployto
 
 dev: build-dev
-	docker-compose run awsdeploy bash
+	docker-compose run deployto bash
 
 clean:
 	rm -fr dist
 
 build: build-dev
-	docker-compose run awsdeploy python setup.py sdist bdist_wheel
-	docker-compose run awsdeploy pandoc --from=markdown --to=rst --output=build/README.rst README.md
+	docker-compose run deployto python setup.py sdist bdist_wheel
+	docker-compose run deployto pandoc --from=markdown --to=rst --output=build/README.rst README.md
 
 release-pypi: build-dev build
-	docker-compose run awsdeploy twine upload dist/*
+	docker-compose run deployto twine upload dist/*
 
 release-docker:
-	docker build --no-cache -t flomotlik/awsdeploy -f Dockerfile.release .
-	docker push flomotlik/awsdeploy
+	docker build --no-cache -t flomotlik/deployto -f Dockerfile.release .
+	docker push flomotlik/deployto
 
 release: release-pypi release-docker
 
 whalebrew:
-	docker build -t flomotlik/awsdeploy:whalebrew -f Dockerfile.whalebrew .
-	whalebrew install -f flomotlik/awsdeploy:whalebrew
+	docker build -t flomotlik/deployto:whalebrew -f Dockerfile.whalebrew .
+	whalebrew install -f flomotlik/deployto:whalebrew

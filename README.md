@@ -1,3 +1,3 @@
 # AWSDeploy
 
-Simple Deployment too for various AWS Services.
+Simple Deployment tool for various AWS Services.

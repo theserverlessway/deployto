@@ -1,6 +1,6 @@
 version: '2'
 services:
-  awsdeploy:
+  deployto:
     build:
       dockerfile: Dockerfile.dev
       context: .

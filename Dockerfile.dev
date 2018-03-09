@@ -11,7 +11,7 @@ RUN pip install -U -r build-requirements.txt
 
 COPY setup.py setup.py
 COPY setup.cfg setup.cfg
-COPY awsdeploy/__init__.py awsdeploy/__init__.py
+COPY deployto/__init__.py deployto/__init__.py
 COPY README.md README.md
 
 RUN pandoc --from=markdown --to=rst --output=README.rst README.md

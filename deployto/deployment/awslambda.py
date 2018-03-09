@@ -1,10 +1,10 @@
 # File needs to be named awslambda.py as python doesn't accept just lambda in imports
 import boto3
 import uuid
-from awsdeploy.deployment.base import BaseDeployment
-from awsdeploy.config import Config
+from deployto.deployment.base import BaseDeployment
+from deployto.config import Config
 from schematics.types import ListType, StringType, BooleanType
-from awsdeploy import package
+from deployto import package
 
 client = boto3.client('cloudformation')
 awslambda = boto3.client('lambda')
