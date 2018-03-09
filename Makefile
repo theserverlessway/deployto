@@ -21,16 +21,16 @@ dev: build-dev
 	docker-compose run deployto bash
 
 clean:
-	rm -fr dist
+	rm -fr dist build
 
 build: build-dev
 	docker-compose run deployto python setup.py sdist bdist_wheel
 	docker-compose run deployto pandoc --from=markdown --to=rst --output=build/README.rst README.md
 
-release-pypi: build-dev build
+release-pypi: clean build-dev build
 	docker-compose run deployto twine upload dist/*
 
-release-docker:
+release-docker: clean
 	docker build --no-cache -t theserverlessway/deployto -f Dockerfile.release .
 	docker push theserverlessway/deployto
 
