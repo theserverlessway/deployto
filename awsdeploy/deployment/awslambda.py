@@ -1,3 +1,4 @@
+# File needs to be named awslambda.py as python doesn't accept just lambda in imports
 import boto3
 import uuid
 from awsdeploy.deployment import Deployment
@@ -12,7 +13,7 @@ awslambda = boto3.client('lambda')
 class LambdaDeployment(Deployment):
 
     def __init__(self, config):
-        self.config = LambdaConfig(config)
+        super(LambdaDeployment, self).__init__(LambdaConfig(config))
 
     def deploy(self):
         zipfile = package.package(self.config.paths)
@@ -53,9 +54,6 @@ class LambdaDeployment(Deployment):
             if self.config.s3:
                 s3.delete_object(Bucket=bucket_name, Key=bucket_path)
                 s3.delete_bucket(Bucket=bucket_name)
-
-    def validate(self, config):
-        self.config.validate()
 
 
 class LambdaConfig(Config):

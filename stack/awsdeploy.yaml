@@ -4,5 +4,5 @@ paths:
  - 'code:'
 s3: false
 functions:
-  - LambdaFunction2
+  - LambdaFunction
 publish: true

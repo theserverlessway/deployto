@@ -1,9 +1,11 @@
 import argparse
 import yaml
-from awsdeploy.lambda_deployment import LambdaDeployment
+from awsdeploy.deployment.awslambda import LambdaDeployment
 from awsdeploy import __version__
 
-SERVICES = {'lambda': LambdaDeployment}
+SERVICES = {
+    'lambda': LambdaDeployment,
+}
 
 
 def main():
@@ -25,3 +27,4 @@ def main():
             print('Service {} is not supported')
     except Exception as e:
         print(e)
+        print(type(e).__name__)
