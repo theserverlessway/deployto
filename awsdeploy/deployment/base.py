@@ -1,4 +1,4 @@
-class Deployment():
+class BaseDeployment():
     def __init__(self, config):
         self.config = config
 
