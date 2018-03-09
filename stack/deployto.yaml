@@ -1,8 +1,0 @@
-stack: teststack
-service: lambda
-paths:
- - 'code:'
-s3: false
-functions:
-  - LambdaFunction
-publish: true

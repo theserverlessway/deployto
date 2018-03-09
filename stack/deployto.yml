@@ -1,0 +1,13 @@
+stack: teststack
+service: lambda
+paths:
+ - code
+ - code:other
+ - 'code:'
+ - code/index.py:code/other.py
+ - code/index.py:other/events.py
+ - 'deployto.yml:'
+s3: false
+functions:
+  - LambdaFunction
+publish: true

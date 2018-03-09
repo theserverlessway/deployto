@@ -14,7 +14,7 @@ def main():
         parser.add_argument('--version', action='version', version='{}'.format(__version__))
         parser.add_argument('--config-file', '-c',
                             type=argparse.FileType('r'),
-                            help='Set the config files to use', default='deployto.yaml')
+                            help='Set the config files to use', default='deployto.yml')
         args = parser.parse_args()
         config_file = args.config_file.read()
         config = yaml.load(config_file)
