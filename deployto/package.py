@@ -22,10 +22,4 @@ def package(paths):
                 for name in glob.glob("{}/*".format(source)):
                     target_file = target + '/' + os.path.basename(name)
                     zipfile_ob.write(name, target_file, zipfile.ZIP_DEFLATED)
-            else:
-                print('Why')
-                print(source)
-                print(target)
-        for name in zipfile_ob.namelist():
-            print(name)
     return file_like_object.getvalue()
