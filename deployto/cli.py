@@ -1,10 +1,13 @@
 import argparse
 import yaml
 from deployto.deployment.awslambda import LambdaDeployment
+from deployto.deployment.elasticbeanstalk import EBDeployment
 from deployto import __version__
+import traceback
 
 SERVICES = {
     'lambda': LambdaDeployment,
+    'elasticbeanstalk': EBDeployment,
 }
 
 
@@ -27,4 +30,5 @@ def main():
             print('Service {} is not supported')
     except Exception as e:
         print(e)
+        print(traceback.format_exc())
         print(type(e).__name__)

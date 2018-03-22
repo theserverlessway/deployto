@@ -1,6 +1,5 @@
 from io import BytesIO
 import zipfile
-import glob
 import os
 
 
@@ -17,9 +16,13 @@ def package(paths):
             if os.path.isfile(source):
                 if not target:
                     target = os.path.basename(source)
+                # print('{} {}'.format(source, target))
                 zipfile_ob.write(source, target, zipfile.ZIP_DEFLATED)
             elif os.path.isdir(source):
-                for name in glob.glob("{}/*".format(source)):
-                    target_file = target + '/' + os.path.basename(name)
-                    zipfile_ob.write(name, target_file, zipfile.ZIP_DEFLATED)
+                # print('{} {}'.format(source, target))
+                for root, dirs, files in os.walk(source):
+                    target_folder = root.replace(source, '', 1) or '/'
+                    for file in files:
+                        target_file = target + target_folder + '/' + file
+                        zipfile_ob.write(os.path.join(root, file), target_file, zipfile.ZIP_DEFLATED)
     return file_like_object.getvalue()
