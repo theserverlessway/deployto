@@ -1,0 +1,7 @@
+Makefile
+Dockerfile*
+dist
+deployto.egg-info
+build
+.gitignore
+docker-compose.yml
