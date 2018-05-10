@@ -5,7 +5,7 @@ install:
 	python setup.py develop
 
 test:
-	py.test --cov=deployto tests/unit
+	py.test --cov-report html --cov-report term-missing --cov=deployto tests/unit
 
 check-code:
 	pycodestyle .

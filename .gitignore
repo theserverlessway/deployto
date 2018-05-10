@@ -2,3 +2,6 @@
 build
 dist
 stack/output
+htmlcov
+.coverage
+.pytest_cache

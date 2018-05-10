@@ -60,6 +60,12 @@ The basic format for including files or folders is `FROM_PATH:TO_PATH`. When `FR
 
 ### Examples
 
+Include everything in the current folder
+```
+paths:
+ - .
+```
+
 Include the code folder (and put it into `code` in the zipfile as well)
 ```
 paths:

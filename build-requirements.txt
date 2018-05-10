@@ -1,11 +1,12 @@
-pycodestyle
-pyflakes
 autopep8
 coverage
-python-coveralls
+mock
+path.py
+pip
+pycodestyle
+pyflakes
 pytest
 pytest-cov
 pytest-mock
-mock
+python-coveralls
 setuptools
-pip

@@ -3,6 +3,10 @@ import zipfile
 import os
 
 
+class PackagingException(Exception):
+    pass
+
+
 def package(paths):
     file_like_object = BytesIO()
     with zipfile.ZipFile(file_like_object, 'w') as zipfile_ob:
@@ -25,4 +29,6 @@ def package(paths):
                     for file in files:
                         target_file = target + target_folder + '/' + file
                         zipfile_ob.write(os.path.join(root, file), target_file, zipfile.ZIP_DEFLATED)
+            else:
+                raise PackagingException('Could not find {}'.format(source))
     return file_like_object.getvalue()
